@@ -65,7 +65,7 @@ const openai = new OpenAI();
 const completion = await openai.chat.completions.create({
     model: "gpt-4o-2024-08-06",
     messages: [
-        {"role": "system", "content": "You are going to help me analyse some data and write a short sentence about it. Focus on trends, talk in past tense"},
+        {"role": "system", "content": "You are going to help me analyse some data and write a short sentence about it. Focus on trends, but be aware that there are 38 gameweeks. Comment on the overall possibility of someone being able to win the league or slip into last place"},
         {"role": "user", "content": JSON.stringify(matchResultsWithCumsum)}
     ]
 });
