@@ -30,6 +30,8 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
+    env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
   deploy:
     needs: build
