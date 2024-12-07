@@ -59,4 +59,20 @@ const matchResultsWithCumsum = matchResults.map((match) => {
   };
 });
 
-process.stdout.write(JSON.stringify(matchResultsWithCumsum));
+import OpenAI from "openai";
+const openai = new OpenAI();
+
+const completion = await openai.chat.completions.create({
+    model: "gpt-4o-2024-08-06",
+    messages: [
+        {"role": "system", "content": "You are going to help me analyse some data and write a short sentence about it. Focus on trends, talk in past tense"},
+        {"role": "user", "content": JSON.stringify(matchResultsWithCumsum)}
+    ]
+});
+
+const output = {
+    sentence: completion.choices[0].message.content,
+    data: matchResultsWithCumsum
+};
+
+process.stdout.write(JSON.stringify(output));

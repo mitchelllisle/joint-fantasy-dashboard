@@ -31,9 +31,13 @@ function pointsPerWeek(data, {width} = {}) {
 }
 ```
 
+<div class="hero">
+  <h2>${matchResults.sentence}</h2>
+</div>
+
 <div class="grid grid-cols-1">
   <div class="card">
-    ${resize((width) => pointsPerWeek(matchResults, {width}))}
+    ${resize((width) => pointsPerWeek(matchResults.data, {width}))}
   </div>
 </div>
 
@@ -137,7 +141,7 @@ function waffleByUser(rawData, {width} = {}) {
   flex-direction: column;
   align-items: center;
   font-family: var(--sans-serif);
-  margin: 4rem 0 8rem;
+  margin: 2rem 0 3rem;
   text-wrap: balance;
   text-align: left;
 }
@@ -157,10 +161,9 @@ function waffleByUser(rawData, {width} = {}) {
 
 .hero h2 {
   margin: 0;
-  max-width: 34em;
+  max-width: none;
   font-size: 20px;
-  font-style: initial;
-  font-weight: 500;
+  /* font-weight: 500; */
   line-height: 1.5;
   color: var(--theme-foreground-muted);
 }
