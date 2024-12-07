@@ -1,32 +1,31 @@
 ---
-theme: dashboard
+theme: light
 title: Dashboard
 toc: false
 ---
 
 <div class="hero">
   <h1>[JOINT] Fantasy Dashboard</h1>
-  <h2>Welcome to your new app! Edit&nbsp;<code style="font-size: 90%;">src/index.md</code> to change this page.</h2>
-  <a href="https://observablehq.com/framework/getting-started">Get started<span style="display: inline-block; margin-left: 0.25rem;">↗︎</span></a>
 </div>
 
 ```js
 const bootstrapStatic = FileAttachment("data/bootstrapStatic.json").json();
 const details = FileAttachment("data/details.json").json();
-
+const matchResults = FileAttachment("data/matchResults.json").json();
 ```
 
 ```js
-function top10Players(data, {width} = {}) {
+function pointsPerWeek(data, {width} = {}) {
   return Plot.plot({
-    title: "Total Points by Player",
+    style: "overflow: visible;",
     width,
-    height: 300,
-    y: {grid: true, label: "Total Points"},
-    x: {label: "Player"},
+    y: {grid: true},
     marks: [
-      Plot.barY(data, Plot.groupX({y: "sum"}, {x: "name", y: "total_points", fill: "#C8553D", tip: true})),
-      Plot.ruleY([0])
+      Plot.ruleY([0]),
+      Plot.axisY({label: "Points"}),
+      Plot.axisX({label: "Gamewek"}),
+      Plot.lineY(data, {x: "gameweek", y: "points_acc", stroke: "team", curve: "natural", marker: true, tip: true}),
+      Plot.text(data, Plot.selectLast({x: "gameweek", y: "points_acc", z: "team", text: "team", textAnchor: "start", dx: 3}))
     ]
   });
 }
@@ -34,7 +33,7 @@ function top10Players(data, {width} = {}) {
 
 <div class="grid grid-cols-1">
   <div class="card">
-    ${resize((width) => top10Players(bootstrapStatic, {width}))}
+    ${resize((width) => pointsPerWeek(matchResults, {width}))}
   </div>
 </div>
 
@@ -42,9 +41,9 @@ function top10Players(data, {width} = {}) {
 function waffleByUser(rawData, {width} = {}) {
   const totalGameweeks = 38;
 
-  const won = "#3ca951";
-  const lose = "#ff725c";
-  const draw = "#4269d0";
+  const won = "#13cf00";
+  const lose = "#d81920";
+  const draw = "#76766f";
 
   const data = rawData.flatMap(d => [
     ...Array(d.matches_won).fill({user: d.user, result: "won"}),
@@ -66,7 +65,7 @@ function waffleByUser(rawData, {width} = {}) {
         Plot.waffleX(data, Plot.groupZ({x: "count"}, {
             fill: "result",
             fx: "user",
-            rx: "100%"
+            rx: "100%",
         })),
         Plot.text(rawData, {
                 fx: "user", 
@@ -74,9 +73,9 @@ function waffleByUser(rawData, {width} = {}) {
                 frameAnchor: "bottom",
                 lineAnchor: "top",
                 dy: 30,
-                fill: won,
+                fill: "black",
                 fontSize: 18,
-                fontWeight: "bold"
+                fontWeight: "bold",
             }
         ),
         Plot.text(rawData, {
@@ -84,7 +83,7 @@ function waffleByUser(rawData, {width} = {}) {
              frameAnchor: "bottom",
                 lineAnchor: "top",
                 dy: 50,
-                fill: won,
+                fill: "black",
                 fontSize: 12,
                 fontWeight: "bold"
             }
@@ -111,6 +110,7 @@ function waffleByUser(rawData, {width} = {}) {
     columns: [
         "rank",
         "user",
+        "total",
         "matches_won",
         "matches_lost",
         "matches_drawn",
@@ -120,6 +120,7 @@ function waffleByUser(rawData, {width} = {}) {
     header: {
         "rank": "Rank",
         "user": "User",
+        "total": "Total",
         "matches_won": "Won",
         "matches_lost": "Lost",
         "matches_drawn": "Draw",
@@ -138,7 +139,7 @@ function waffleByUser(rawData, {width} = {}) {
   font-family: var(--sans-serif);
   margin: 4rem 0 8rem;
   text-wrap: balance;
-  text-align: center;
+  text-align: left;
 }
 
 .hero h1 {
@@ -148,7 +149,7 @@ function waffleByUser(rawData, {width} = {}) {
   font-size: 6vh !important;
   font-weight: 900;
   line-height: 1;
-  background: linear-gradient(30deg, var(--theme-foreground-focus), currentColor);
+  background: linear-gradient(90deg, #02efff,  #00ff87);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
