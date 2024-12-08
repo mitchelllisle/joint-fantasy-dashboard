@@ -1,5 +1,5 @@
 ---
-theme: light
+theme: [light]
 title: Dashboard
 toc: false
 ---
@@ -7,6 +7,7 @@ toc: false
 ```js
 import {PointsPerWeek} from "./components/pointsPerWeek.js";
 import {WaffleByUser} from "./components/waffleByUser.js";
+import {PlayerScatter} from "./components/playerScatter.js";
 ```
 
 ```js
@@ -33,7 +34,7 @@ const userInLast = matchResults.data.reduce((max, current) =>
   <h2>${matchResults.sentence}</h2>
 </div>
 
-<div class="grid grid-cols-2">
+<div class="grid grid-cols-4">
   <a class="card" style="color: inherit;">
     <h2>🏆 1st Place</h2>
     <br>
@@ -50,38 +51,58 @@ const userInLast = matchResults.data.reduce((max, current) =>
   <div class="card">
     ${resize((width) => PointsPerWeek(matchResults.data, {width}))}
   </div>
-</div>
-
-
-<div class="grid grid-cols-1">
   <div class="card">
-    ${resize((width) => WaffleByUser(details, {width}))}
+    ${resize((width) => PlayerScatter(bootstrapStatic, {width}))}
   </div>
 </div>
 
-<div class="card" style="padding: 0;">
-  ${Inputs.table(details, {
-    columns: [
-        "rank",
-        "user",
-        "total",
-        "matches_won",
-        "matches_lost",
-        "matches_drawn",
-        "points_for",
-        "points_against"
-    ],
-    header: {
-        "rank": "Rank",
-        "user": "User",
-        "total": "Total",
-        "matches_won": "Won",
-        "matches_lost": "Lost",
-        "matches_drawn": "Draw",
-        "points_for": "Points For",
-        "points_against": "Points Against"
-    }
-  })}
+```js
+function sparkbar(max) {
+  return (x) => htl.html`<div style="
+    background: var(--theme-green);
+    color: black;
+    font: 10px/1.6 var(--sans-serif);
+    width: ${100 * x / max}%;
+    float: right;
+    padding-right: 3px;
+    box-sizing: border-box;
+    overflow: visible;
+    display: flex;
+    justify-content: end;">${x.toLocaleString("en-US")}`
+}
+```
+
+<div class="grid grid-cols-2">
+  <div class="card" style="padding: 0;">
+      ${Inputs.table(details, {
+        format: {
+            total: sparkbar(d3.max(details, d => d.total)),
+        },  
+        columns: [
+            "rank",
+            "user",
+            "total",
+            "matches_won",
+            "matches_lost",
+            "matches_drawn",
+            "points_for",
+            "points_against"
+        ],
+        header: {
+            "rank": "Rank",
+            "user": "User",
+            "total": "Total",
+            "matches_won": "Won",
+            "matches_lost": "Lost",
+            "matches_drawn": "Draw",
+            "points_for": "Points For",
+            "points_against": "Points Against"
+        }
+      })}
+    </div>
+  <div class="card">
+    ${resize((width) => WaffleByUser(details, {width}))}
+  </div>
 </div>
 
 <style>

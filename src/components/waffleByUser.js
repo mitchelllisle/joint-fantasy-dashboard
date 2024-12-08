@@ -3,9 +3,9 @@ import * as Plot from "npm:@observablehq/plot";
 export function WaffleByUser(rawData, {width} = {}) {
     const totalGameweeks = 38;
   
-    const won = "#13cf00";
-    const lose = "#d81920";
-    const draw = "#76766f";
+    const won = "#6cc5b0";
+    const lose = "#ff725c";
+    const draw = "#4269d0";
   
     const data = rawData.flatMap(d => [
       ...Array(d.matches_won).fill({user: d.user, result: "won"}),
@@ -43,11 +43,11 @@ export function WaffleByUser(rawData, {width} = {}) {
           Plot.text(rawData, {
               fx: "user", text: (_) => "Win Percentage",
                frameAnchor: "bottom",
-                  lineAnchor: "top",
-                  dy: 50,
-                  fill: "black",
-                  fontSize: 12,
-                  fontWeight: "bold"
+                lineAnchor: "top",
+                dy: 50,
+                fill: "black",
+                fontSize: 12,
+                fontWeight: "bold"
               }
           )
   

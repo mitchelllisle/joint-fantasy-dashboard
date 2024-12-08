@@ -4,7 +4,8 @@ class Summariser {
     constructor() {
       this.openai = new OpenAI();
       this.instructions = `You are going to help me analyse some fantasy premier league data for the competition I'm in and write a short sentence about it. 
-      When commenting on the results, try to avoid simple descriptions and focus more on finding something interesting. Also, make sure to mention something about each user.
+      When commenting on the results, try to avoid simple descriptions and focus more on finding something interesting. 
+      Also, make sure to mention something about each user (Ryan, Mitchell, Jay and Kerrod).
       There are 38 gameweeks but you'll get the gameweeks that have been completed. 
       Comment on the overall possibility of someone being able to win the league or slip into last place.
       It has to sit at the top of a dashbord so make it concise and to the point.
@@ -106,11 +107,7 @@ class PremierLeagueAPI {
       const matchResultsWithCumsum = await this.getCumulativeSum(matchResults);
 
       const sentence = await this.summariser.summarise(matchResultsWithCumsum);
-        // const sentence = `As we analyze the Fantasy Premier League data from the completed gameweeks, 
-        // it’s evident that while Jay initially surged to the top, his consistency has waned, leaving him vulnerable as Kerrod continues to climb in the standings. 
-        // Mitchell's fluctuating performances keep his team in the mix, but he must find a way to capitalize on opportunities, 
-        // whereas Ryan’s recent struggles put him in jeopardy of slipping into the last position if he doesn’t regain form 
-        // quickly—highlighting that every point counts in this fiercely competitive league.`
+    //   const sentence = `Sample sentence`;
 
       return {
           sentence: sentence,
