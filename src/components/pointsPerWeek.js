@@ -3,6 +3,7 @@ import * as Plot from "npm:@observablehq/plot";
 
 export function PointsPerWeek(data, {width} = {}) {
     return Plot.plot({
+      title: "Points per Gameweek",
       style: "overflow: visible;",
       width,
       y: {grid: true},

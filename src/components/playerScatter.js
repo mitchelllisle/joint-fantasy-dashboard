@@ -10,6 +10,7 @@ export function PlayerScatter(data, {width} = {}) {
     const unowned = data.filter(d => d.owner === null);
 
     return Plot.plot({
+        title: "Player Minutes vs Points",
         width,
         grid: true,
         color: {
