@@ -14,16 +14,16 @@ export function PlayerScatter(data, {width} = {}) {
         width,
         grid: true,
         color: {
-            domain: ["Mitchell", "Jay", "Ryan", "Kerrod", null],
-            range: ["#ff725c", "#4269d0", "#6cc5b0", "#efb118", "#b1b2b4"],
+            domain: ["Mitchell", "Jay", "Ryan", "Kerrod"],
+            range: ["#4269d0", "#ff725c", "#6cc5b0", "#efb118"],
             legend: true
         },
         x: {label: "Points"},
         y: {label: "Minutes"},
         symbol: {legend: true},
         marks: [
-            Plot.dot(unowned, {x: x, y: y, r: 10, opacity: 0.2, fill: fill, channels: {name: "name"}, tip: true}),
-            Plot.dot(owned, {x: x, y: y, r: 10, opacity: 0.8, fill: fill, channels: {name: "name"}, tip: true}),
+            Plot.dot(unowned, {x: x, y: y, r: 10, opacity: 0.2, fill: fill}),
+            Plot.dot(owned, {x: x, y: y, r: 10, opacity: 0.8, fill: fill}),
         ]
       })
 }

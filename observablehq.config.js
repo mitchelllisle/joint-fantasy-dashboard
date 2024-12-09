@@ -24,7 +24,7 @@ export default {
 
   // Some additional configuration options and their defaults:
   // theme: "default", // try "light", "dark", "slate", etc.
-  // header: "[JOINT] Fantasy Dashboard", // what to show in the header (HTML)
+  header: '<img src="logo-white.svg" alt="Logo" style="height: 40px; vertical-align: middle;"> [JOINT] Fantasy Dashboard',
   footer: "", // what to show in the footer (HTML)
   sidebar: false, // whether to show the sidebar
   // toc: true, // whether to show the table of contents

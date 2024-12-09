@@ -1,4 +1,6 @@
 import OpenAI from "openai";
+import _ from "lodash"
+
 
 class Summariser {
     constructor() {
@@ -100,18 +102,34 @@ class PremierLeagueAPI {
         });
     }
 
+    async getRankingsForGameweeks(matchResults) {
+        const gameweeks = matchResults.map((m) => m.gameweek).filter((value, index, self) => self.indexOf(value) === index);
+        const rankings = gameweeks.flatMap((g) => {
+            const gameweekResults = matchResults.filter((m) => m.gameweek === g);
+            return _.sortBy(gameweekResults, (m) => m.points_acc)
+                .reverse()
+                .map((item, index) => ({
+                    ...item,
+                    rank: index + 1
+                }));
+        });
+
+        return rankings;
+    }
+
     async run() {
       const details = await this.getDetails();
       const users = await this.getUsers(details);
       const matchResults = await this.getMatchResults(details, users);
       const matchResultsWithCumsum = await this.getCumulativeSum(matchResults);
+      const matchResultsWithCumsumRankings = await this.getRankingsForGameweeks(matchResultsWithCumsum);
 
       const sentence = await this.summariser.summarise(matchResultsWithCumsum);
     //   const sentence = `Sample sentence`;
 
       return {
           sentence: sentence,
-          data: matchResultsWithCumsum
+          data: matchResultsWithCumsumRankings
       };
     }
 

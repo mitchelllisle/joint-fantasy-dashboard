@@ -7,6 +7,11 @@ export function PointsPerWeek(data, {width} = {}) {
       style: "overflow: visible;",
       width,
       y: {grid: true},
+      color: {
+        domain: ["Mitchell", "Jay", "Ryan", "Kerrod"],
+        range: ["#4269d0", "#ff725c", "#6cc5b0", "#efb118"],
+        legend: true
+      },
       marks: [
         Plot.ruleY([0]),
         Plot.axisY({label: "Points"}),

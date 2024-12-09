@@ -35,7 +35,7 @@ export function WaffleByUser(rawData, {width} = {}) {
                   frameAnchor: "bottom",
                   lineAnchor: "top",
                   dy: 30,
-                  fill: "black",
+                  fill: "white",
                   fontSize: 18,
                   fontWeight: "bold",
               }
@@ -45,7 +45,7 @@ export function WaffleByUser(rawData, {width} = {}) {
                frameAnchor: "bottom",
                 lineAnchor: "top",
                 dy: 50,
-                fill: "black",
+                fill: "white",
                 fontSize: 12,
                 fontWeight: "bold"
               }

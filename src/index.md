@@ -1,19 +1,25 @@
 ---
-theme: [light]
+theme: [dashboard]
 title: Dashboard
 toc: false
 ---
+
 
 ```js
 import {PointsPerWeek} from "./components/pointsPerWeek.js";
 import {WaffleByUser} from "./components/waffleByUser.js";
 import {PlayerScatter} from "./components/playerScatter.js";
+import {BumpChart} from "./components/bumpChart.js";
 ```
 
 ```js
 const bootstrapStatic = FileAttachment("data/bootstrapStatic.json").json();
 const details = FileAttachment("data/details.json").json();
 const matchResults = FileAttachment("data/matchResults.json").json();
+```
+
+```js
+const maxGameweek = d3.max(matchResults.data, d => d.gameweek);
 ```
 
 ```js
@@ -26,13 +32,13 @@ const userInLast = matchResults.data.reduce((max, current) =>
 );
 ```
 
-<div class="hero">
-  <h1>[JOINT] Fantasy Dashboard</h1>
+## The results after gameweek ${maxGameweek}
+
+
+<div>
+  <p style="max-width: 1000px;">${matchResults.sentence}</p>
 </div>
 
-<div class="hero">
-  <h2>${matchResults.sentence}</h2>
-</div>
 
 <div class="grid grid-cols-4">
   <a class="card" style="color: inherit;">
@@ -48,6 +54,12 @@ const userInLast = matchResults.data.reduce((max, current) =>
 </div>
 
 <div class="grid grid-cols-1">
+  <div class="card">
+    ${resize((width) => BumpChart(matchResults.data, {width}))}
+  </div>
+</div>
+
+<div class="grid grid-cols-2">
   <div class="card">
     ${resize((width) => PointsPerWeek(matchResults.data, {width}))}
   </div>
@@ -104,43 +116,3 @@ function sparkbar(max) {
     ${resize((width) => WaffleByUser(details, {width}))}
   </div>
 </div>
-
-<style>
-
-.hero {
-  display: flex;
-  flex-direction: column;
-  font-family: var(--sans-serif);
-  margin: 2rem 0 3rem;
-  text-wrap: balance;
-  text-align: left;
-}
-
-.hero h1 {
-  margin: 1rem 0;
-  max-width: none;
-  font-size: 6vh !important;
-  font-weight: 900;
-  line-height: 1;
-  background: linear-gradient(90deg, #02efff,  #00ff87);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.hero h2 {
-  margin: 0;
-  max-width: none;
-  font-size: 18px;
-  /* font-weight: 500; */
-  line-height: 1.5;
-  color: var(--theme-foreground-muted);
-}
-
-@media (min-width: 640px) {
-  .hero h1 {
-    font-size: 90px;
-  }
-}
-
-</style>
