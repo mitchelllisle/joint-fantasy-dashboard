@@ -14,8 +14,8 @@ export function PlayerScatter(data, {width} = {}) {
         width,
         grid: true,
         color: {
-            domain: ["Mitchell", "Jay", "Ryan", "Kerrod"],
-            range: ["#4269d0", "#ff725c", "#6cc5b0", "#efb118"],
+            domain: ["Mitchell", "Jay", "Ryan", "Kerrod", null],
+            range: ["#4269d0", "#ff725c", "#6cc5b0", "#efb118", "#626060"],
             legend: true
         },
         x: {label: "Points"},
@@ -24,6 +24,11 @@ export function PlayerScatter(data, {width} = {}) {
         marks: [
             Plot.dot(unowned, {x: x, y: y, r: 10, opacity: 0.2, fill: fill}),
             Plot.dot(owned, {x: x, y: y, r: 10, opacity: 0.8, fill: fill}),
+            Plot.tip(data, Plot.pointer({
+                x: x,
+                y: y,
+                channels: {Owner: "owner", Name: "name"},
+            }))
         ]
       })
 }
