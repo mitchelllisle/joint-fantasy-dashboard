@@ -36,10 +36,7 @@ const firstToSecondPointsGap = Math.abs(userInFirst.points_acc - userInSecond.po
 const secondToThirdPointsGap = Math.abs(userInSecond.points_acc - userInThird.points_acc);
 const thirdToLastPointsGap = Math.abs(userInThird.points_acc - userInLast.points_acc);
 const lastToFirstPointsGap = Math.abs(userInLast.points_acc - userInFirst.points_acc);
-
-console.log(userInFirst, userInSecond, userInThird, userInLast);
 ```
-
 
 ## The results after gameweek ${maxGameweek}
 
@@ -48,12 +45,11 @@ console.log(userInFirst, userInSecond, userInThird, userInLast);
   <p style="max-width: 1000px;">${matchResults.sentence}</p>
 </div>
 
-
 <div class="grid grid-cols-4">
   <a class="card" style="color: inherit;">
     <h2>🏆 1st Place</h2>
     <br>
-    <span class="big">${userInFirst.team}</span>
+    <span class="big">${userInFirst.team} 🎉</span>
     <br>
     <br>
     <span class="muted">
@@ -65,7 +61,7 @@ console.log(userInFirst, userInSecond, userInThird, userInLast);
   <a class="card" style="color: inherit;">
     <h2>💰 Last Place</h2>
     <br>
-    <span class="big">${userInLast.team}</span>
+    <span class="big">${userInLast.team} 😰</span>
     <br>
     <br>
     <span class="muted">

@@ -29,7 +29,7 @@ export function PlayerScatter(data, {width} = {}) {
                 x: x,
                 y: y,
                 channels: {Owner: "owner", Name: "name"},
-            }))
+            })),
         ]
       })
 }

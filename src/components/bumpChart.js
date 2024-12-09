@@ -26,10 +26,10 @@ export function BumpChart(data, {x = "gameweek", y = "rank", z = "team", width} 
             Plot.lineY(data, {
                 ...rank,
                 stroke: z,
-                strokeWidth: 24,
+                strokeWidth: 26,
                 curve: "bump-x",
                 sort: {color: "y", reduce: "first"},
-                render: halo({stroke: "var(--theme-background-alt)", strokeWidth: 27})
+                render: halo()
             }),
             Plot.text(data, {
                 ...rank,
