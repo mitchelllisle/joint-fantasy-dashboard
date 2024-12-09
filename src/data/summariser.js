@@ -10,7 +10,7 @@ export class Summariser {
       Comment on the overall possibility of someone being able to win the league or slip into last place.
       It has to sit at the top of a dashbord so make it concise and to the point.
       points_acc is the cumulative points for each team and will tell you the standings in the league, but you have to also make sure you're looking at the latest gameweek (higher number).
-      Also, the loser has to pay $500 to the teams join bank account so make sure to mention that in the sentence if it's relevant.
+      Also, the loser has to pay $500 to the teams joint bank account so make sure to mention that in the sentence if it's relevant.
       `;
     }
 
