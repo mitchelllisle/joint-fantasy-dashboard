@@ -11,6 +11,7 @@ export function PlayerScatter(data, {width} = {}) {
 
     return Plot.plot({
         title: "Player Minutes vs Points",
+        subtitle: "Shows the relationship between minutes played and points scored clustered by owner.",
         width,
         grid: true,
         color: {

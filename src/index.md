@@ -23,14 +23,23 @@ const maxGameweek = d3.max(matchResults.data, d => d.gameweek);
 ```
 
 ```js
-const userInFirst = matchResults.data.reduce((max, current) => 
-    current.rank < max.rank ? current : max
-);
+function filterForRank(data, rank, maxGameweek) {
+  return data.filter((d) => d.rank === rank && d.gameweek === maxGameweek)[0];
+};
 
-const userInLast = matchResults.data.reduce((max, current) => 
-    current.rank > max.rank ? current : max
-);
+const userInFirst = filterForRank(matchResults.data, 1, maxGameweek);
+const userInSecond = filterForRank(matchResults.data, 2, maxGameweek);
+const userInThird = filterForRank(matchResults.data, 3, maxGameweek);
+const userInLast = filterForRank(matchResults.data, details.length, maxGameweek);
+
+const firstToSecondPointsGap = Math.abs(userInFirst.points_acc - userInSecond.points_acc);
+const secondToThirdPointsGap = Math.abs(userInSecond.points_acc - userInThird.points_acc);
+const thirdToLastPointsGap = Math.abs(userInThird.points_acc - userInLast.points_acc);
+const lastToFirstPointsGap = Math.abs(userInLast.points_acc - userInFirst.points_acc);
+
+console.log(userInFirst, userInSecond, userInThird, userInLast);
 ```
+
 
 ## The results after gameweek ${maxGameweek}
 
@@ -45,11 +54,25 @@ const userInLast = matchResults.data.reduce((max, current) =>
     <h2>🏆 1st Place</h2>
     <br>
     <span class="big">${userInFirst.team}</span>
+    <br>
+    <br>
+    <span class="muted">
+        ${userInFirst.team} is winning with <b style="color: #6cc5b0">${userInFirst.points_acc}</b> points. 
+        He is <b style="color: #6cc5b0">${firstToSecondPointsGap}</b> points off ${userInSecond.team} in second 
+        and <b style="color: #6cc5b0">${lastToFirstPointsGap}</b> points away from last.
+    </span>
   </a>
   <a class="card" style="color: inherit;">
     <h2>💰 Last Place</h2>
     <br>
     <span class="big">${userInLast.team}</span>
+    <br>
+    <br>
+    <span class="muted">
+        ${userInLast.team} is in last place on <b style="color: #ff725c">${userInLast.points_acc}</b> points. 
+        He is <b style="color: #ff725c">${thirdToLastPointsGap}</b> points off ${userInThird.team} in third 
+        and <b style="color: #ff725c">${lastToFirstPointsGap}</b> off first place.
+    </span>
   </a>
 </div>
 

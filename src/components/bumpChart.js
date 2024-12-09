@@ -6,6 +6,7 @@ export function BumpChart(data, {x = "gameweek", y = "rank", z = "team", width} 
     const [xmin, xmax] = d3.extent(Plot.valueof(data, x));
     return Plot.plot({
         title: "Rank Across Gameweeks",
+        subtitle: "Shows the rankings as they change throughout the season",
         width,
         x: {
             [width < 480 ? "insetRight" : "inset"]: 30,
