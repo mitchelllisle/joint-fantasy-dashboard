@@ -96,7 +96,7 @@ class PremierLeagueAPI {
       const matchResultsWithCumsum = await this.getCumulativeSum(matchResults);
       const matchResultsWithCumsumRankings = await this.getRankingsForGameweeks(matchResultsWithCumsum);
 
-      const title = await this.summariser.chat("Give me a snappy title for this data. No more than 10 words", matchResultsWithCumsumRankings);
+      const title = await this.summariser.chat("Give me a funny title for this data. Decide who the most relevant person is and focus on them in the title. No more than 10 words", matchResultsWithCumsumRankings);
       const sentence = await this.summariser.summarise(matchResultsWithCumsum);
 
       // const title = `Sample title`;
