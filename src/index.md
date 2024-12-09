@@ -24,11 +24,11 @@ const maxGameweek = d3.max(matchResults.data, d => d.gameweek);
 
 ```js
 const userInFirst = matchResults.data.reduce((max, current) => 
-    current.points_acc > max.points_acc ? current : max
+    current.rank < max.rank ? current : max
 );
 
 const userInLast = matchResults.data.reduce((max, current) => 
-    current.points_acc < max.points_acc ? current : max
+    current.rank > max.rank ? current : max
 );
 ```
 

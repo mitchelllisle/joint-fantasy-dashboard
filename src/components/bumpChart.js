@@ -3,11 +3,7 @@ import * as d3 from "npm:d3";
 
 export function BumpChart(data, {x = "gameweek", y = "rank", z = "team", width} = {}) {
     const rank = Plot.stackY2({x, z, order: y});
-    console.log(rank);
-
     const [xmin, xmax] = d3.extent(Plot.valueof(data, x));
-
-    console.log(xmin, xmax);
     return Plot.plot({
         title: "Rank Across Gameweeks",
         width,
