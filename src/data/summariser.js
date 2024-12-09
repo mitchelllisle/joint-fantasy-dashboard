@@ -11,7 +11,17 @@ export class Summariser {
       It has to sit at the top of a dashbord so make it concise and to the point.
       points_acc is the cumulative points for each team and will tell you the standings in the league, but you have to also make sure you're looking at the latest gameweek (higher number).
       Also, the loser has to pay $500 to the teams joint bank account so make sure to mention that in the sentence if it's relevant.
+      Make sure to think about the best way to present the data in a sentence and make it interesting and insightful.
       `;
+    }
+
+    async chat(message, data = null) {
+        const completion = await this.openai.chat.completions.create({
+            model: "gpt-4o-mini",
+            messages: [{"role": "user", "content": message}, {"role": "user", "content": JSON.stringify(data)}]
+        });
+
+        return completion.choices[0].message.content;
     }
 
     async summarise(data) {

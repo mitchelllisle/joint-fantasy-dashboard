@@ -38,8 +38,7 @@ const thirdToLastPointsGap = Math.abs(userInThird.points_acc - userInLast.points
 const lastToFirstPointsGap = Math.abs(userInLast.points_acc - userInFirst.points_acc);
 ```
 
-## The results after gameweek ${maxGameweek}
-
+## Gameweek ${maxGameweek}: ${matchResults.title}
 
 <div>
   <p style="max-width: 1000px;">${matchResults.sentence}</p>
