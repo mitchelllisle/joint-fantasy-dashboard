@@ -78,12 +78,21 @@ class PremierLeagueAPI {
         const gameweeks = matchResults.map((m) => m.gameweek).filter((value, index, self) => self.indexOf(value) === index);
         const rankings = gameweeks.flatMap((g) => {
             const gameweekResults = matchResults.filter((m) => m.gameweek === g);
-            return _.sortBy(gameweekResults, (m) => m.points_acc)
-                .reverse()
-                .map((item, index) => ({
-                    ...item,
-                    rank: index + 1
-                }));
+            const sortedResults = _.sortBy(gameweekResults, (m) => m.points_acc).reverse();
+
+            let currentRank = 1;
+            let previousPoints = sortedResults[0].points_acc;
+            sortedResults[0].rank = currentRank;
+
+            for (let i = 1; i < sortedResults.length; i++) {
+                if (sortedResults[i].points_acc < previousPoints) {
+                    currentRank++;
+                }
+                sortedResults[i].rank = currentRank;
+                previousPoints = sortedResults[i].points_acc;
+            }
+
+            return sortedResults;
         });
 
         return rankings;
@@ -96,7 +105,11 @@ class PremierLeagueAPI {
       const matchResultsWithCumsum = await this.getCumulativeSum(matchResults);
       const matchResultsWithCumsumRankings = await this.getRankingsForGameweeks(matchResultsWithCumsum);
 
-      const title = await this.summariser.chat("Give me a funny title for this data. Decide who the most relevant person is and focus on them in the title. No more than 10 words", matchResultsWithCumsumRankings);
+      const title = await this.summariser.chat(
+          `Give me a funny title for this data. Decide who the most relevant person
+          is and focus on them in the title. No more than 10 words`,
+          matchResultsWithCumsumRankings
+      );
       const sentence = await this.summariser.summarise(matchResultsWithCumsum);
 
       // const title = `Sample title`;

@@ -10,6 +10,7 @@ import {PointsPerWeek} from "./components/pointsPerWeek.js";
 import {WaffleByUser} from "./components/waffleByUser.js";
 import {PlayerScatter} from "./components/playerScatter.js";
 import {BumpChart} from "./components/bumpChart.js";
+import {pointsBarChart} from "./components/pointsBarChart.js";
 ```
 
 ```js
@@ -103,6 +104,15 @@ function sparkbar(max) {
 ```
 
 <div class="grid grid-cols-2">
+  <div class="card">
+    ${resize((width) => pointsBarChart(matchResults.data, {width}))}
+  </div>
+  <div class="card">
+    ${resize((width) => WaffleByUser(details, {width}))}
+  </div>
+</div>
+
+<div class="grid grid-cols-1">
   <div class="card" style="padding: 0;">
       ${Inputs.table(details, {
         format: {
@@ -130,7 +140,4 @@ function sparkbar(max) {
         }
       })}
     </div>
-  <div class="card">
-    ${resize((width) => WaffleByUser(details, {width}))}
-  </div>
 </div>
