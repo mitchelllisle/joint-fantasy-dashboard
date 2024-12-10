@@ -45,6 +45,7 @@ const lastToFirstPointsGap = Math.abs(userInLast.points_acc - userInFirst.points
   <p style="max-width: 1000px;">${matchResults.sentence}</p>
 </div>
 
+
 <div class="grid grid-cols-4">
   <a class="card" style="color: inherit;">
     <h2>🏆 1st Place</h2>
@@ -83,7 +84,7 @@ const lastToFirstPointsGap = Math.abs(userInLast.points_acc - userInFirst.points
     ${resize((width) => PointsPerWeek(matchResults.data, {width}))}
   </div>
   <div class="card">
-    ${resize((width) => PlayerScatter(bootstrapStatic, {width}))}
+    ${resize((width) => PlayerScatter(bootstrapStatic.data, {width}))}
   </div>
 </div>
 
