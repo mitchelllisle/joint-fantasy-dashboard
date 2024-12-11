@@ -1,4 +1,5 @@
 import * as Plot from "npm:@observablehq/plot";
+import {noDataTextMark} from "./shared/noDataTextMark.js";
 
 export function WaffleByUser(rawData, {width} = {}) {
     const totalGameweeks = 38;
@@ -12,7 +13,7 @@ export function WaffleByUser(rawData, {width} = {}) {
         ...Array(d.matches_lost).fill({user: d.user, result: "lost"}),
         ...Array(d.matches_drawn).fill({user: d.user, result: "drawn"})
     ]);
-
+    console.log(data);
     return Plot.plot({
         title: "Match Results",
         subtitle: "Shows the results of each match played by each player",
@@ -23,6 +24,7 @@ export function WaffleByUser(rawData, {width} = {}) {
         marginTop: 20,
         marginBottom: 70,
         marks: [
+            ...noDataTextMark(data),
             Plot.axisFx({lineWidth: 10, anchor: "bottom"}),
             Plot.waffleX({length: 1}, {x: totalGameweeks, fillOpacity: 0.4, rx: "100%"}),
             Plot.waffleX(data, Plot.groupZ({x: "count"}, {

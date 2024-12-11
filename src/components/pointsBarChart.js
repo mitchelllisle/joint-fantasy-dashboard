@@ -1,4 +1,5 @@
 import * as Plot from "npm:@observablehq/plot";
+import {noDataTextMark} from "./shared/noDataTextMark.js";
 
 export function pointsBarChart(data, {width} = {}) {
     const x = "gameweek";
@@ -19,6 +20,7 @@ export function pointsBarChart(data, {width} = {}) {
         marks: [
             Plot.ruleY([0]),
             Plot.barY(data, {x: x, y: y, fill: z, order: z, tip: true}),
+            ...noDataTextMark(data)
         ]
     });
 }

@@ -14,6 +14,22 @@ import {pointsBarChart} from "./components/pointsBarChart.js";
 ```
 
 ```js
+function sparkbar(max) {
+  return (x) => htl.html`<div style="
+    background: var(--theme-green);
+    color: black;
+    font: 10px/1.6 var(--sans-serif);
+    width: ${100 * x / max}%;
+    float: right;
+    padding-right: 3px;
+    box-sizing: border-box;
+    overflow: visible;
+    display: flex;
+    justify-content: end;">${x.toLocaleString("en-US")}`
+}
+```
+
+```js
 const bootstrapStatic = FileAttachment("data/bootstrapStatic.json").json();
 const details = FileAttachment("data/details.json").json();
 const matchResults = FileAttachment("data/matchResults.json").json();
@@ -79,37 +95,63 @@ const lastToFirstPointsGap = Math.abs(userInLast.points_acc - userInFirst.points
   </div>
 </div>
 
-<div class="grid grid-cols-2">
-  <div class="card">
-    ${resize((width) => PointsPerWeek(matchResults.data, {width}))}
-  </div>
-  <div class="card">
-    ${resize((width) => PlayerScatter(bootstrapStatic.data, {width}))}
-  </div>
-</div>
+<style>
+
+.inputs-3a86ea-input {
+    height: 30px;
+    float: right;
+}
+
+</style>
+
+<hr>
+
+## Breakdown by Players
+Choose a player to see their performance across a range of metrics or select "All" to everyone's performance.
 
 ```js
-function sparkbar(max) {
-  return (x) => htl.html`<div style="
-    background: var(--theme-green);
-    color: black;
-    font: 10px/1.6 var(--sans-serif);
-    width: ${100 * x / max}%;
-    float: right;
-    padding-right: 3px;
-    box-sizing: border-box;
-    overflow: visible;
-    display: flex;
-    justify-content: end;">${x.toLocaleString("en-US")}`
-}
+const player = view(
+  Inputs.select(
+      ["All", "None"].concat(details.map((d) => d.user)),
+      {unique: true, label: null}
+  )
+);
+```
+
+```js
+function filterForInput(data, player, field) {
+    return data.filter((d) => {
+        if (player === "All") {
+            return true;
+        } else if (player === "None") {
+            return d[field] === null;
+        } else {
+            return d[field] === player
+        }
+    })
+};
+
+const bootstrapStaticUser = filterForInput(bootstrapStatic.data, player, "owner");
+const matchResultsUser = filterForInput(matchResults.data, player, "team");
+const detailsUser = filterForInput(details, player, "user");
 ```
 
 <div class="grid grid-cols-2">
   <div class="card">
-    ${resize((width) => pointsBarChart(matchResults.data, {width}))}
+    ${resize((width) => PointsPerWeek(matchResultsUser, {width}))}
   </div>
   <div class="card">
-    ${resize((width) => WaffleByUser(details, {width}))}
+    ${resize((width) => PlayerScatter(bootstrapStaticUser, {width}))}
+  </div>
+</div>
+
+
+<div class="grid grid-cols-2">
+  <div class="card">
+    ${resize((width) => pointsBarChart(matchResultsUser, {width}))}
+  </div>
+  <div class="card">
+    ${resize((width) => WaffleByUser(detailsUser, {width}))}
   </div>
 </div>
 
