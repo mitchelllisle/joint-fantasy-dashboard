@@ -6,7 +6,7 @@ const api = new PremierLeagueAPI();
 
 async function run(premierLeagueAPI, summariser) {
   const details = await premierLeagueAPI.getDetails();
-  const users = await premierLeagueAPI.getUsersFromDetails(details);
+  const users = await premierLeagueAPI.getUsers();
   const matchResults = await premierLeagueAPI.getMatchResults(details, users);
   const matchResultsWithCumsum = await premierLeagueAPI.getCumulativeSum(matchResults);
   const matchResultsWithCumsumRankings = await premierLeagueAPI.getRankingsForGameweeks(matchResultsWithCumsum);
