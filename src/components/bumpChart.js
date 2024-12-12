@@ -1,7 +1,7 @@
 import * as Plot from "npm:@observablehq/plot";
 import * as d3 from "npm:d3";
 
-export function BumpChart(data, {x = "gameweek", y = "rank", z = "team", width} = {}) {
+export function bumpChart(data, {x = "gameweek", y = "rank", z = "team", width} = {}) {
     const rank = Plot.stackY2({x, z, order: y});
     const [xmin, xmax] = d3.extent(Plot.valueof(data, x));
     return Plot.plot({

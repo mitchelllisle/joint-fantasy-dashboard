@@ -4,12 +4,11 @@ title: Dashboard
 toc: false
 ---
 
-
 ```js
-import {PointsPerWeek} from "./components/pointsPerWeek.js";
-import {WaffleByUser} from "./components/waffleByUser.js";
-import {PlayerScatter} from "./components/playerScatter.js";
-import {BumpChart} from "./components/bumpChart.js";
+import {pointsPerWeek} from "./components/pointsPerWeek.js";
+import {waffleByUser} from "./components/waffleByUser.js";
+import {playerScatter} from "./components/playerScatter.js";
+import {bumpChart} from "./components/bumpChart.js";
 import {pointsBarChart} from "./components/pointsBarChart.js";
 ```
 
@@ -91,7 +90,7 @@ const lastToFirstPointsGap = Math.abs(userInLast.points_acc - userInFirst.points
 
 <div class="grid grid-cols-1">
   <div class="card">
-    ${resize((width) => BumpChart(matchResults.data, {width}))}
+    ${resize((width) => bumpChart(matchResults.data, {width}))}
   </div>
 </div>
 
@@ -138,10 +137,10 @@ const detailsUser = filterForInput(details, player, "user");
 
 <div class="grid grid-cols-2">
   <div class="card">
-    ${resize((width) => PointsPerWeek(matchResultsUser, {width}))}
+    ${resize((width) => pointsPerWeek(matchResultsUser, {width}))}
   </div>
   <div class="card">
-    ${resize((width) => PlayerScatter(bootstrapStaticUser, {width}))}
+    ${resize((width) => playerScatter(bootstrapStaticUser, {width}))}
   </div>
 </div>
 
@@ -151,7 +150,7 @@ const detailsUser = filterForInput(details, player, "user");
     ${resize((width) => pointsBarChart(matchResultsUser, {width}))}
   </div>
   <div class="card">
-    ${resize((width) => WaffleByUser(detailsUser, {width}))}
+    ${resize((width) => waffleByUser(detailsUser, {width}))}
   </div>
 </div>
 
