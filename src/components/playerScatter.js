@@ -1,6 +1,6 @@
 import * as Plot from "npm:@observablehq/plot";
 
-export function PlayerScatter(data, {width} = {}) {
+export function playerScatter(data, {width} = {}) {
     const x = "total_points";
     const y = "minutes";
     const fill = "owner";

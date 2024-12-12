@@ -1,7 +1,7 @@
 import * as Plot from "npm:@observablehq/plot";
 import {noDataTextMark} from "./shared/noDataTextMark.js";
 
-export function WaffleByUser(rawData, {width} = {}) {
+export function waffleByUser(rawData, {width} = {}) {
     const totalGameweeks = 38;
 
     const won = "#6cc5b0";

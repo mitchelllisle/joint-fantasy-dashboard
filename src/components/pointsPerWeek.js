@@ -2,7 +2,7 @@ import * as Plot from "npm:@observablehq/plot";
 import {noDataTextMark} from "./shared/noDataTextMark.js";
 
 
-export function PointsPerWeek(data, {width} = {}) {
+export function pointsPerWeek(data, {width} = {}) {
     return Plot.plot({
       title: "Points per Gameweek",
       subtitle: "Shows a cumulative points total for each player over the course of the season",
