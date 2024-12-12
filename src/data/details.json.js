@@ -4,7 +4,8 @@ const api = new PremierLeagueAPI();
 
 async function run(premierLeagueAPI) {
   const details = await premierLeagueAPI.getDetails();
-  return await premierLeagueAPI.getStandings(details);
+  const users = await premierLeagueAPI.getUsers();
+  return await premierLeagueAPI.getStandings(details, users);
 }
 
 const standings = await run(api);

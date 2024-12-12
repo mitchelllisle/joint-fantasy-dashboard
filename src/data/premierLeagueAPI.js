@@ -31,15 +31,14 @@ export class PremierLeagueAPI {
         const response = await fetch(`${this.url}/league/${this.leagueId}/details`);
         if (!response.ok) throw new Error(`fetch failed: ${response.status}`);
         const data = await response.json();
-        return data.league_entries;
-    }
-
-    async getStandings(details) {
-        const users = details.league_entries.map((e) => ({
-            id: e.id,
+        return data.league_entries.map((e) => ({
+            ...e,
             name: e.entry_name,
             first_name: e.player_first_name,
         }));
+    }
+
+    async getStandings(details, users) {
         return details.standings.map((e) => ({
             id: e.league_entry,
             name: users.find(u => u.id === e.league_entry).name,
@@ -104,19 +103,6 @@ export class PremierLeagueAPI {
             }
         });
         return players;
-    }
-
-    /**
-     * Extracts users from the league details.
-     * @param {Object} details - The league details.
-     * @returns {Array} - The list of users.
-     */
-    async getUsersFromDetails(details) {
-        return details.league_entries.map((e) => ({
-            id: e.id,
-            name: e.entry_name,
-            first_name: e.player_first_name,
-        }));
     }
 
     /**
