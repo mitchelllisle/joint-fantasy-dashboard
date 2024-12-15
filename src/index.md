@@ -9,7 +9,7 @@ import {pointsPerWeek} from "./components/pointsPerWeek.js";
 import {waffleByUser} from "./components/waffleByUser.js";
 import {playerScatter} from "./components/playerScatter.js";
 import {bumpChart} from "./components/bumpChart.js";
-import {pointsBarChart} from "./components/pointsBarChart.js";
+import {playerPointsBarChart} from "./components/playerPointsBarChart.js";
 ```
 
 ```js
@@ -147,7 +147,7 @@ const detailsUser = filterForInput(details, player, "user");
 
 <div class="grid grid-cols-2">
   <div class="card">
-    ${resize((width) => pointsBarChart(matchResultsUser, {width}))}
+    ${resize((width) => playerPointsBarChart(matchResultsUser, {width}))}
   </div>
   <div class="card">
     ${resize((width) => waffleByUser(detailsUser, {width}))}
