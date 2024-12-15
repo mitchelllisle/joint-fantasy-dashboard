@@ -49,7 +49,7 @@ const teamLogo = `https://resources.premierleague.com/premierleague/badges/50/t$
 ```
 
 ```js
-html`<img src=${teamLogo} width=60px;></img><h1 style="display: table-caption; margin-left: 10px; min-width: 500px;">${team}</h1>`
+html`<img src=${teamLogo} width="60px"></img><h1 style="display: table-caption; margin-left: 10px; min-width: 500px;">${team}</h1>`
 ```
 
 <div class="grid grid-cols-1">
