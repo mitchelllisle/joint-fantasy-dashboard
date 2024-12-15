@@ -12,7 +12,7 @@ async function run(premierLeagueAPI, summariser) {
   const matchResultsWithCumsumRankings = await premierLeagueAPI.getRankingsForGameweeks(matchResultsWithCumsum);
 
   const title = await summariser.chat(
-      `Give me a title for this data. Decide who the most relevant person to focus on in the title. 
+      `Give me a title for this data. Decide who the most relevant person to focus on in the title.
       Focus on the most recent gameweek and alternate between all the users. Don't give me stats or numbers, give me
       the type of title you'd see on a 1950s old timey newspaper. No more than 8 words`,
       matchResultsWithCumsumRankings
