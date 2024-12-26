@@ -64,13 +64,17 @@ export class PremierLeagueAPI {
         const data = await response.json();
 
         return data.elements.map((e) => ({
-            id: e.id,
             name: e.web_name,
-            team: e.team,
-            minutes: e.minutes,
-            total_points: e.total_points,
-            owner: null
+            owner: null,
+            ...e
         }));
+    }
+
+    async getCurrentGameweek() {
+        const response = await fetch(`${this.url}/bootstrap-static`);
+        if (!response.ok) throw new Error(`fetch failed: ${response.status}`);
+        const data = await response.json();
+        return data.events.current
     }
 
     /**

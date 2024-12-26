@@ -8,6 +8,13 @@ export function playerScatter(data, {width} = {}) {
     const owned = data.filter(d => d.owner !== null);
     const unowned = data.filter(d => d.owner === null);
 
+    let nullColour;
+    if (owned.length > 0) {
+        nullColour = "#626060"
+    } else {
+        nullColour = "#EBF2FA"
+    }
+
     return Plot.plot({
         title: "Player Minutes vs Points",
         subtitle: "Shows the relationship between minutes played and points scored clustered by owner.",
@@ -15,7 +22,7 @@ export function playerScatter(data, {width} = {}) {
         grid: true,
         color: {
             domain: ["Mitchell", "Jay", "Ryan", "Kerrod", null],
-            range: ["#4269d0", "#ff725c", "#6cc5b0", "#efb118", "#626060"],
+            range: ["#4269d0", "#ff725c", "#6cc5b0", "#efb118", nullColour],
             legend: true
         },
         x: {label: "Points"},
