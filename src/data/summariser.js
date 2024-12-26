@@ -16,6 +16,12 @@ export class Summariser {
       points_acc is the cumulative points for each team and will tell you the standings in the league, but you have to also make sure you're looking at the latest gameweek (higher number).
       Also, the loser has to pay $500 to the teams joint bank account so make sure to mention that in the sentence if it's relevant.
       Make sure to think about the best way to present the data in a sentence and make it interesting and insightful.
+      Some facts you can work in:
+      The person writing this is Mitchell. When I am coming last, comment something along the lines of 'maybe if 
+      he spent more time on his team instead of making this dashboard he wouldn't be last.
+      Ryan has never lost any of the fantasy leagues he's been in (he hasn't always won, but never lost).
+      Jay has won the most fantasy leagues out of everyone in the group.
+      Kerrod has lost the most.
       `;
     }
 
