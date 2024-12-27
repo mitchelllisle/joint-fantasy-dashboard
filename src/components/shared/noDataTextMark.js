@@ -6,5 +6,5 @@ export function noDataTextMark(data) {
         y: 0,
         text: "No data available for this chart. Try a different selection.",
         textAnchor: "middle",
-    }], {x: "x", y: "y", dy: -10, fontSize: 16, text: "text"})] : [])
+    }], {x: "x", y: "y", dy: -10, fontSize: 12, text: "text"})] : [])
 }

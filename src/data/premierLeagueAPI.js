@@ -216,6 +216,13 @@ export class PremierLeagueAPI {
         }));
     }
 
+    async getCurrentGameweek() {
+        const response = await fetch(`${this.url}/bootstrap-static`);
+        if (!response.ok) throw new Error(`fetch failed: ${response.status}`);
+        const data = await response.json();
+        return data.events.current
+    }
+
     /**
      * Fetches the picks for a user in a specific gameweek.
      * @param {Object} user - The user object.
