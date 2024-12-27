@@ -111,7 +111,7 @@ Choose a player to see their performance across a range of metrics or select "Al
 ```js
 const player = view(
   Inputs.select(
-      ["All", "None"].concat(details.map((d) => d.user)),
+      ["All", "Owned", "None"].concat(details.map((d) => d.user)),
       {unique: true, label: null}
   )
 );
@@ -124,6 +124,8 @@ function filterForInput(data, player, field) {
             return true;
         } else if (player === "None") {
             return d[field] === null;
+        } else if (player === "Owned") {
+            return d[field] !== null;
         } else {
             return d[field] === player
         }
