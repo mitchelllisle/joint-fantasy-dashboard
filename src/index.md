@@ -10,6 +10,7 @@ import {waffleByUser} from "./components/waffleByUser.js";
 import {playerScatter} from "./components/playerScatter.js";
 import {bumpChart} from "./components/bumpChart.js";
 import {pointsBarChart} from "./components/pointsBarChart.js";
+import {giniIndexChart} from "./components/giniIndexChart.js";
 ```
 
 ```js
@@ -136,6 +137,11 @@ const bootstrapStaticUser = filterForInput(bootstrapStatic.data, player, "owner"
 const matchResultsUser = filterForInput(matchResults.data, player, "team");
 const detailsUser = filterForInput(details, player, "user");
 ```
+<div class="grid grid-cols-1">
+  <div class="card">
+    ${resize((width) => giniIndexChart(bootstrapStaticUser, {width}))}
+  </div>
+</div>
 
 <div class="grid grid-cols-2">
   <div class="card">
@@ -145,7 +151,6 @@ const detailsUser = filterForInput(details, player, "user");
     ${resize((width) => playerScatter(bootstrapStaticUser, {width}))}
   </div>
 </div>
-
 
 <div class="grid grid-cols-2">
   <div class="card">

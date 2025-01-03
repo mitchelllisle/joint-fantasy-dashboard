@@ -1,6 +1,11 @@
+export const mitchell = "#4269d0";
+export const jay = "#ff725c";
+export const ryan = "#6cc5b0";
+export const kerrod = "#efb118";
+
 export const colours = {
     domain: ["Mitchell", "Jay", "Ryan", "Kerrod", null],
-    range: ["#4269d0", "#ff725c", "#6cc5b0", "#efb118", "#626060"],
+    range: [mitchell, jay, ryan, kerrod, "#626060"],
 }
 
 export const won = "#6cc5b0";
