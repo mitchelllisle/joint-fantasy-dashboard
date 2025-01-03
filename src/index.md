@@ -55,6 +55,14 @@ const thirdToLastPointsGap = Math.abs(userInThird.points_acc - userInLast.points
 const lastToFirstPointsGap = Math.abs(userInLast.points_acc - userInFirst.points_acc);
 ```
 
+```ts
+function choice(arr: any[]): any {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+const firstEmojis = ["😁", "🥇", "🎉", "🎊"];
+const lastEmojis = ["😭", "😰", "💀️", "🙈"];
+```
+
 ## Gameweek ${maxGameweek}: ${matchResults.title}
 
 <div>
@@ -66,7 +74,7 @@ const lastToFirstPointsGap = Math.abs(userInLast.points_acc - userInFirst.points
   <a class="card" style="color: inherit;">
     <h2>🏆 1st Place</h2>
     <br>
-    <span class="big">${userInFirst.team} 🎉</span>
+    <span class="big">${userInFirst.team} ${choice(firstEmojis)}</span>
     <br>
     <br>
     <span class="muted">
@@ -78,7 +86,7 @@ const lastToFirstPointsGap = Math.abs(userInLast.points_acc - userInFirst.points
   <a class="card" style="color: inherit;">
     <h2>💰 Last Place</h2>
     <br>
-    <span class="big">${userInLast.team} 😰</span>
+    <span class="big">${userInLast.team} ${choice(lastEmojis)}</span>
     <br>
     <br>
     <span class="muted">

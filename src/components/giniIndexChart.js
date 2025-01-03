@@ -21,15 +21,20 @@ export function giniIndexChart(data , {width}) {
 
     return Plot.plot({
         title: "Gini Index by Owner",
-        subtitle: "A measure of inequality in points scored. 0% = perfectly equal, 100 = one player has all the points. The lower the score, the more players are contributing the points.",
+        subtitle: `
+            A measure of inequality in points scored. 0% = perfectly equal, 100 = one player has all the points.
+            The lower the score, the more players are contributing the points. Size of hexagon represents max points 
+            scored by a single player.`,
         width,
         color: {...colours, legend: false},
         x: {domain: [0, 100], label: "Gini Index"},
-        r: {range: [-5, 15]},
+        r: {range: [-5, 20]},
         marginTop: 40,
         marks: [
-            Plot.hexagon(chartData, {x: "gini", tip: true, r: "maxPoints", fill: "owner", strokeWidth: 10}),
-            Plot.text(chartData, {x: "gini", dy: -35, rotate: -90, text: d => d.owner}),
+            Plot.hexagon(
+                chartData, {x: "gini", tip: true, r: "maxPoints", fill: "owner", fillOpacity: 0.8, strokeWidth: 10}
+            ),
+            Plot.text(chartData, {x: "gini", dy: -40, rotate: -90, text: d => d.owner}),
         ]
     });
 }
