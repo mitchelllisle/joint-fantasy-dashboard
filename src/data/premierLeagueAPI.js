@@ -1,5 +1,147 @@
 import _ from "lodash"
 
+const teamColours = [{
+        id: 1,
+        second_id: 1,
+        name: "Arsenal",
+        mainColor: "#e20712",
+        secondaryColor: "#ffffff"
+    },
+    {
+        id: 2,
+        second_id: 2,
+        name: "Aston Villa",
+        mainColor: "#410e1e",
+        secondaryColor: "#94c0e6"
+    },
+    {
+        id: 3,
+        second_id: 127,
+        name: "Bournemouth",
+        mainColor: "#c4090e",
+        secondaryColor: "#000000"
+    },
+    {
+        id: 4,
+        second_id: 130,
+        name: "Brentford",
+        mainColor: "#bf0300",
+        secondaryColor: "#ffba1c"
+    },
+    {
+        id: 5,
+        second_id: 131,
+        name: "Brighton & Hove Albion",
+        mainColor: "#0154a6",
+        secondaryColor: "#ffffff"
+    },
+    {
+        id: 11,
+        second_id: 26,
+        name: "Leicester City",
+        mainColor: "#062d88",
+        secondaryColor: "#faba00"
+    },
+    {
+        id: 6,
+        second_id: 4,
+        name: "Chelsea",
+        mainColor: "#001489",
+        secondaryColor: "#ffffff"
+    },
+    {
+        id: 7,
+        second_id: 6,
+        name: "Crystal Palace",
+        mainColor: "#ee2b20",
+        secondaryColor: "#0055a6"
+    },
+    {
+        id: 8,
+        second_id: 7,
+        name: "Everton",
+        mainColor: "#004593",
+        secondaryColor: "#ffffff"
+    },
+    {
+        id: 9,
+        second_id: 34,
+        name: "Fulham",
+        mainColor: "#ffffff",
+        secondaryColor: "#000000"
+    },
+    {
+        id: 12,
+        second_id: 10,
+        name: "Liverpool",
+        mainColor: "#e31921",
+        secondaryColor: "#ffffff"
+    },
+    {
+        id: 10,
+        second_id: 8,
+        name: "Ipswich Town",
+        mainColor: "#0c3d91",
+        secondaryColor: "#ffffff"
+    },
+    {
+        id: 13,
+        second_id: 11,
+        name: "Manchester City",
+        mainColor: "#7ab1e2",
+        secondaryColor: "#ffffff"
+    },
+    {
+        id: 14,
+        second_id: 12,
+        name: "Manchester United",
+        mainColor: "#db0712",
+        secondaryColor: "#000000"
+    },
+    {
+        id: 15,
+        second_id: 23,
+        name: "Newcastle United",
+        mainColor: "#000000",
+        secondaryColor: "#ffffff"
+    },
+    {
+        id: 16,
+        second_id: 15,
+        name: "Nottingham Forest",
+        mainColor: "#ed3039",
+        secondaryColor: "#ffffff"
+    },
+    {
+        id: 17,
+        second_id: 20,
+        name: "Southampton",
+        mainColor: "#ed3039",
+        secondaryColor: "#ffffff"
+    },
+    {
+        id: 18,
+        second_id: 21,
+        name: "Tottenham Hotspur",
+        mainColor: "#ffffff",
+        secondaryColor: "#131f54"
+    },
+    {
+        id: 19,
+        second_id: 25,
+        name: "West Ham United",
+        mainColor: "#410e1e",
+        secondaryColor: "#94c0e6"
+    },
+    {
+        id: 20,
+        second_id: 38,
+        name: "Wolverhampton Wanderers",
+        mainColor: "#faba00",
+        secondaryColor: "#000000"
+    }
+]
+
 export class PremierLeagueAPI {
     /**
      * Creates an instance of the PremierLeagueAPI class.
@@ -8,6 +150,7 @@ export class PremierLeagueAPI {
      */
     constructor(leagueId = 8999) {
         this.url = "https://draft.premierleague.com/api";
+        this.footaballApiUrl = "https://footballapi.pulselive.com/football";
         this.leagueId = leagueId;
     }
 
@@ -62,11 +205,14 @@ export class PremierLeagueAPI {
         const response = await fetch(`${this.url}/bootstrap-static`);
         if (!response.ok) throw new Error(`fetch failed: ${response.status}`);
         const data = await response.json();
-
         return data.elements.map((e) => ({
+            ...e,
             name: e.web_name,
             owner: null,
-            ...e
+            team_code: data.teams.find((t) => t.id === e.team).code,
+            team_name: data.teams.find((t) => t.id === e.team).name,
+            team_primary_colour: teamColours.find((t) => t.id === e.team).mainColor,
+            team_secondary_colour: teamColours.find((t) => t.id === e.team).secondaryColor,
         }));
     }
 
@@ -200,5 +346,30 @@ export class PremierLeagueAPI {
         });
 
         return rankings;
+    }
+
+    async getTeamStats(teamId, comp = 1, seasonId = 719) {
+        const response = await fetch(
+            `${this.footaballApiUrl}/stats/team/${teamId}?comps=${comp}&compSeasons=${seasonId}`
+        );
+        if (!response.ok) throw new Error(`fetch failed: ${response.status} for team ${teamId}`);
+        return await response.json()
+    }
+
+    async getAllTeamStats() {
+        const teamStats = []
+
+        for (let i = 0; i <= teamColours.length - 1; i++) {
+            const teamData = teamColours[i]
+
+            const stats = await this.getTeamStats(teamData.second_id).then(data => data.stats);
+
+            const result = stats.reduce((acc, row) => {
+                acc[row.name] = row.value;
+                return acc;
+            }, {});
+            teamStats.push({...teamData, ...result})
+        }
+        return teamStats
     }
 }

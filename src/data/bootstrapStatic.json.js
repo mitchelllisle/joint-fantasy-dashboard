@@ -1,6 +1,4 @@
-
 import {PremierLeagueAPI} from "./premierLeagueAPI.js";
-
 const api = new PremierLeagueAPI();
 
 async function run(premierLeagueAPI) {
@@ -10,7 +8,8 @@ async function run(premierLeagueAPI) {
 
     const allPicks = (await Promise.all(users.map(user => premierLeagueAPI.getPicks(user, players, currentGameweek)))).flat();
     const playersWithOwners = await premierLeagueAPI.attachOwners(players, allPicks)
-    return {"data": playersWithOwners}
+
+    return {"data": playersWithOwners};
 }
 
 const playersWithOwners = await run(api);
