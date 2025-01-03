@@ -1,5 +1,6 @@
 import * as Plot from "npm:@observablehq/plot";
 import {noDataTextMark} from "./shared/noDataTextMark.js";
+import {colours} from "./shared/colours.js";
 
 
 export function pointsPerWeek(data, {width} = {}) {
@@ -13,11 +14,7 @@ export function pointsPerWeek(data, {width} = {}) {
         style: "overflow: visible;",
         width,
         y: {grid: true},
-        color: {
-            domain: ["Mitchell", "Jay", "Ryan", "Kerrod"],
-            range: ["#4269d0", "#ff725c", "#6cc5b0", "#efb118"],
-            legend: true
-        },
+        color: {...colours, legend: true},
         marks: [
             Plot.ruleY([0]),
             Plot.axisY({label: "Points"}),

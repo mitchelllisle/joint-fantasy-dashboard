@@ -1,4 +1,5 @@
 import * as Plot from "npm:@observablehq/plot";
+import {colours} from "./shared/colours.js";
 
 export function playerScatter(data, {width} = {}) {
     const x = "total_points";
@@ -8,23 +9,12 @@ export function playerScatter(data, {width} = {}) {
     const owned = data.filter(d => d.owner !== null);
     const unowned = data.filter(d => d.owner === null);
 
-    let nullColour;
-    if (owned.length > 0) {
-        nullColour = "#626060"
-    } else {
-        nullColour = "#EBF2FA"
-    }
-
     return Plot.plot({
         title: "Player Minutes vs Points",
         subtitle: "Shows the relationship between minutes played and points scored clustered by owner.",
         width,
         grid: true,
-        color: {
-            domain: ["Mitchell", "Jay", "Ryan", "Kerrod", null],
-            range: ["#4269d0", "#ff725c", "#6cc5b0", "#efb118", nullColour],
-            legend: true
-        },
+        color: {...colours, legend: true},
         x: {label: "Points"},
         y: {label: "Minutes"},
         symbol: {legend: true},

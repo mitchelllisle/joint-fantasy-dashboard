@@ -1,5 +1,6 @@
 import * as Plot from "npm:@observablehq/plot";
 import {noDataTextMark} from "./shared/noDataTextMark.js";
+import {colours} from "./shared/colours.js";
 
 export function pointsBarChart(data, {width} = {}) {
     const x = "gameweek";
@@ -18,11 +19,7 @@ export function pointsBarChart(data, {width} = {}) {
         style: "overflow: visible;",
         width,
         y: {grid: true},
-        color: {
-            domain: ["Mitchell", "Jay", "Ryan", "Kerrod"],
-            range: ["#4269d0", "#ff725c", "#6cc5b0", "#efb118"],
-            legend: true
-        },
+        color: {...colours, legend: true},
         marks: [
             Plot.ruleY([0]),
             Plot.barY(data, {x: x, y: y, fill: z, order: z, tip: true}),
