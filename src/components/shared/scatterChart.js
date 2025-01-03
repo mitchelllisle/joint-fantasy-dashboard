@@ -18,7 +18,7 @@ export function scatterChart(data, {width, height, x, y, z, title, subtitle, str
         y: {label: yLabel},
         symbol: {legend: true},
         marks: [
-            Plot.dot(data, {x: x, y: y, r: r, opacity: 0.8, stroke, fill: z}),
+            Plot.dot(data, {x: x, y: y, r: r, opacity: 0.6, stroke, fill: z}),
             Plot.tip(data, Plot.pointer({x: x, y: y})),
             label,
         ]

@@ -7,6 +7,7 @@ toc: false
 ```js
 import {teamPlayersScatter} from "./components/teamPlayersScatter.js";
 import {teamComparisonScatter} from "./components/teamComparisonScatter.js";
+import {mostImportantPlayer} from "./components/mostImportantPlayer.js";
 ```
 
 ```js
@@ -52,9 +53,12 @@ const teamLogo = `https://resources.premierleague.com/premierleague/badges/50/t$
 html`<img src=${teamLogo} width="60px"></img><h1 style="display: table-caption; margin-left: 10px; min-width: 500px;">${team}</h1>`
 ```
 
-<div class="grid grid-cols-1">
+<div class="grid grid-cols-2">
   <div class="card">
     ${resize((width) => teamPlayersScatter(teamData, {width}))}
+  </div>
+  <div class="card">
+    ${resize((width, height) => mostImportantPlayer(teamData, {width, height}))}
   </div>
 </div>
 
