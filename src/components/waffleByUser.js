@@ -1,12 +1,9 @@
 import * as Plot from "npm:@observablehq/plot";
 import {noDataTextMark} from "./shared/noDataTextMark.js";
+import {won, lose, draw} from "./shared/colours.js";
 
 export function waffleByUser(rawData, {width, height} = {}) {
     const totalGameweeks = 38;
-
-    const won = "#6cc5b0";
-    const lose = "#ff725c";
-    const draw = "#4269d0";
 
     const data = rawData.flatMap(d => [
         ...Array(d.matches_won).fill({user: d.user, result: "won"}),

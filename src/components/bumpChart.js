@@ -1,5 +1,6 @@
 import * as Plot from "npm:@observablehq/plot";
 import * as d3 from "npm:d3";
+import {colours} from "./shared/colours.js";
 
 export function bumpChart(data, {x = "gameweek", y = "rank", z = "team", width} = {}) {
     const rank = Plot.stackY2({x, z, order: y});
@@ -18,10 +19,7 @@ export function bumpChart(data, {x = "gameweek", y = "rank", z = "team", width} 
             inset: 20,
             reverse: true
         },
-        color: {
-            domain: ["Mitchell", "Jay", "Ryan", "Kerrod"],
-            range: ["#4269d0", "#ff725c", "#6cc5b0", "#efb118"],
-        },
+        color: colours,
         marks: [
             Plot.lineY(data, {
                 ...rank,
