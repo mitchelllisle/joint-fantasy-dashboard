@@ -1,5 +1,5 @@
 import * as Plot from "npm:@observablehq/plot";
-import {jay, mitchell, ryan, kerrod, colours} from "./shared/colours.js";
+import {colours} from "./shared/colours.js";
 import {calculateGini} from "./shared/gini.js";
 import _ from "lodash";
 
@@ -32,9 +32,8 @@ export function giniIndexChart(data , {width}) {
         marginTop: 40,
         marks: [
             Plot.hexagon(
-                chartData, {x: "gini", tip: true, r: "maxPoints", fill: "owner", fillOpacity: 0.8, strokeWidth: 10}
+                chartData, Plot.dodgeY({x: "gini", r: "maxPoints", fill: "owner", tip: true, fillOpacity: 0.8, strokeWidth: 10})
             ),
-            Plot.text(chartData, {x: "gini", dy: -40, rotate: -90, text: d => d.owner}),
         ]
     });
 }
