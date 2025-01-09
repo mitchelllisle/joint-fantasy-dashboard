@@ -12,9 +12,11 @@ async function run(premierLeagueAPI, summariser) {
   const matchResultsWithCumsumRankings = await premierLeagueAPI.getRankingsForGameweeks(matchResultsWithCumsum);
 
   const title = await summariser.chat(
-      `Give me a title for this data. Decide who the most relevant person to focus on in the title. 
-      Focus on the most recent gameweek and alternate between all the users. Don't give me stats or numbers, give me
-      the type of title you'd see on a 1950s old timey newspaper. No more than 8 words`,
+      `Give me one sentences that describe the results of the most recent gameweek that includes a high level analysis of
+      the results. Every week there are two games that happen. Don't give me stats or numbers, just focus on the result.
+      Something like 'player a beat player b in a close game' or 'player c dominated player d in a one sided match'. 
+      Be more creative than that though. Keep it to 20 words or less. Don't include any * in the title. 
+      Make it sound like a newspaper article`,
       matchResultsWithCumsumRankings
   );
 
