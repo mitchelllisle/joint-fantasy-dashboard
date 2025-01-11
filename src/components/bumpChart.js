@@ -27,7 +27,7 @@ export function bumpChart(data, {x = "gameweek", y = "rank", z = "team", width} 
                 strokeWidth: 26,
                 curve: "bump-x",
                 sort: {color: "y", reduce: "first"},
-                render: halo()
+                render: halo({stroke: "var(--theme-background-alt)", strokeWidth: 33})
             }),
             Plot.text(data, {
                 ...rank,
