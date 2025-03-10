@@ -5,6 +5,7 @@
 Joint Fantasy Dashboard is a web application built using the [Observable Framework](https://observablehq.com/framework/). 
 This project provides a dashboard to manage and visualize English Premier League Draft mode fantasy competitions.
 
+
 ## Installation
 
 To install the required dependencies, run:
